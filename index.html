@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vocabulary Quiz</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 2rem; background-color: #f9f9f9; }
+    .quiz-container { max-width: 800px; margin: auto; background: white; padding: 2rem; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+    h2 { color: #333; }
+    .question { margin-bottom: 1.5rem; }
+    .options label { display: block; margin: 0.5rem 0; }
+    .submit-btn { margin-top: 2rem; padding: 0.5rem 1rem; font-size: 1rem; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer; }
+    .submit-btn:hover { background-color: #45a049; }
+    .result { margin-top: 2rem; font-size: 1.2rem; font-weight: bold; color: #333; }
+    .feedback { font-style: italic; color: #d9534f; margin-top: 0.5rem; }
+    .correct { color: green; }
+  </style>
+</head>
+<body>
+  <div class="quiz-container">
+    <h2>Vocabulary Quiz</h2>
+    <form id="quizForm">
+      <!-- Questions Here -->
+
+      <div class="question" id="q1-box">
+        <p>1. What does the word "abandoned" mean?</p>
+        <div class="options">
+          <label><input type="radio" name="q1" value="A"> A) To adapt</label>
+          <label><input type="radio" name="q1" value="B"> B) Left without care</label>
+          <label><input type="radio" name="q1" value="C"> C) Competitive</label>
+          <label><input type="radio" name="q1" value="D"> D) Disguised</label>
+        </div>
+        <div class="feedback" id="q1-feedback"></div>
+      </div>
+
+      <div class="question" id="q2-box">
+        <p>2. What is the meaning of "absurd"?</p>
+        <div class="options">
+          <label><input type="radio" name="q2" value="A"> A) Something familiar</label>
+          <label><input type="radio" name="q2" value="B"> B) Clever and skilful</label>
+          <label><input type="radio" name="q2" value="C"> C) Stupid and unreasonable</label>
+          <label><input type="radio" name="q2" value="D"> D) Competitive</label>
+        </div>
+        <div class="feedback" id="q2-feedback"></div>
+      </div>
+
+      <div class="question" id="q3-box">
+        <p>3. The word "accommodate" means:</p>
+        <div class="options">
+          <label><input type="radio" name="q3" value="A"> A) To hide</label>
+          <label><input type="radio" name="q3" value="B"> B) To adapt</label>
+          <label><input type="radio" name="q3" value="C"> C) To break</label>
+          <label><input type="radio" name="q3" value="D"> D) To fall</label>
+        </div>
+        <div class="feedback" id="q3-feedback"></div>
+      </div>
+
+      <div class="question" id="q4-box">
+        <p>4. Choose the correct meaning of "adroit":</p>
+        <div class="options">
+          <label><input type="radio" name="q4" value="A"> A) Weak and delicate</label>
+          <label><input type="radio" name="q4" value="B"> B) Clever or skilful</label>
+          <label><input type="radio" name="q4" value="C"> C) Worn out</label>
+          <label><input type="radio" name="q4" value="D"> D) Serious</label>
+        </div>
+        <div class="feedback" id="q4-feedback"></div>
+      </div>
+
+      <div class="question" id="q5-box">
+        <p>5. "Affluent" refers to someone who is:</p>
+        <div class="options">
+          <label><input type="radio" name="q5" value="A"> A) Hungry</label>
+          <label><input type="radio" name="q5" value="B"> B) Competitive</label>
+          <label><input type="radio" name="q5" value="C"> C) Wealthy</label>
+          <label><input type="radio" name="q5" value="D"> D) Kind</label>
+        </div>
+        <div class="feedback" id="q5-feedback"></div>
+      </div>
+
+      <button type="submit" class="submit-btn">Submit</button>
+    </form>
+    <div id="result" class="result"></div>
+  </div>
+
+  <script>
+    const correctAnswers = {
+      q1: "B",
+      q2: "C",
+      q3: "B",
+      q4: "B",
+      q5: "C"
+    };
+
+    document.getElementById('quizForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      let score = 0;
+      let total = Object.keys(correctAnswers).length;
+
+      for (let q in correctAnswers) {
+        const answer = document.querySelector(`input[name="${q}"]:checked`);
+        const feedback = document.getElementById(`${q}-feedback`);
+        if (answer) {
+          if (answer.value === correctAnswers[q]) {
+            score++;
+            feedback.innerHTML = `<span class='correct'>Correct!</span>`;
+          } else {
+            feedback.innerHTML = `Incorrect. Correct answer: <strong>${correctAnswers[q]}</strong>`;
+          }
+        } else {
+          feedback.innerHTML = `No answer selected. Correct answer: <strong>${correctAnswers[q]}</strong>`;
+        }
+      }
+
+      document.getElementById('result').textContent = `You scored ${score} out of ${total}.`;
+    });
+  </script>
+</body>
+</html>
